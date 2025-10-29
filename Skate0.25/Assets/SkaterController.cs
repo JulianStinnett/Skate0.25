@@ -55,6 +55,7 @@ public class SkaterController : MonoBehaviour
 
                 grinding = false; // leave rail if we were grinding
                 bufferTimer = -1f;
+                SimpleAudio.Instance?.PlayJump();
             }
         }
     }
@@ -74,21 +75,6 @@ public class SkaterController : MonoBehaviour
         Vector2 origin = (Vector2)col.bounds.center + Vector2.down * (col.bounds.extents.y + 0.02f);
         var hit = Physics2D.OverlapBox(origin, size, 0f, groundMask);
         return hit != null && !grinding;
-    }
-
-    // Simple grind API (we’ll add rails later)
-    public void StartGrind(float railY)
-    {
-        grinding = true;
-        rb.velocity = new Vector2(rb.velocity.x, 0f);
-        rb.gravityScale = 0f;
-        transform.position = new Vector3(transform.position.x, railY, transform.position.z);
-    }
-
-    public void StopGrind()
-    {
-        grinding = false;
-        rb.gravityScale = 3f; // match your default gravity scale
     }
 
     void OnDrawGizmosSelected()

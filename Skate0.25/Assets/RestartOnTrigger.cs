@@ -12,6 +12,8 @@ public class RestartOnTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
+            SimpleAudio.Instance?.PlayCrash(); 
             Attempts.Increment();  
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
